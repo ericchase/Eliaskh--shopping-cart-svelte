@@ -145,7 +145,7 @@
   ],
   "accessory": [
     {
-      "id": 1,
+      "id": "1",
       "name": "accessoryName",
       "imageSrc": "URL",
       "Price": 100,

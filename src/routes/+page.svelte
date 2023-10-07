@@ -1,5 +1,5 @@
 <script>
-  import ProductCard from '$lib/component/productCard.svelte';
+  import ProductCard from '$lib/component/ProductCard.svelte';
   import products from '$lib/data/product.json';
 
   function handleClink(e) {}

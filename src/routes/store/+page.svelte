@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ProductCard from '$lib/component/productCard.svelte';
   import products from '$lib/data/product.json';
 
   let typeOfProduct: string = 'coffee';
@@ -15,8 +16,7 @@
   </div>
   <div class="cardList">
     <div class="cards">
-      {products[typeOfProduct][0].name}
-      <!-- {CreateSmallCard(products[typeOfProduct], 10)} -->
+      <ProductCard arrayOfProducts={products[typeOfProduct]} numberOfProduct={10} />
     </div>
   </div>
 </div>

@@ -17,7 +17,9 @@
         </div>
       </a>
       <div class="btnParent}">
-        <div>Buy Now</div>
+        <div class="btnParent">
+          <div>Buy Now</div>
+        </div>
       </div>
     </div>
   {/each}

@@ -5,6 +5,7 @@
   let typeOfProduct: string = 'coffee';
   function handleClink(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
     typeOfProduct = e.currentTarget.value;
+    console.log(typeOfProduct);
   }
 </script>
 

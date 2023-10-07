@@ -1,4 +1,7 @@
 <script>
+  import ProductCard from '$lib/component/productCard.svelte';
+  import products from '$lib/data/product.json';
+
   function handleClink(e) {}
 </script>
 
@@ -10,7 +13,9 @@
 
   <div class="cardList">
     <button class="btn" on:click={handleClink} value="coffee"> Coffee </button>
-    <div class="cards">{'CreateSmallCard(data.coffee, 5)'}</div>
+    <div class="cards">
+      <ProductCard arrayOfProducts={products.coffee} numberOfProduct={5} />
+    </div>
 
     <button class="showMoreBtn">
       <a href="/store">Show More {'>>'}</a>
@@ -18,9 +23,9 @@
   </div>
 
   <div class="cardList">
-    <button class="btn" on:click={handleClink} value="coffee"> Machine </button>
+    <button class="btn" on:click={handleClink} value="machine"> Machine </button>
     <div class="cards">
-      {'CreateSmallCard(data.machine, 5)'}
+      <ProductCard arrayOfProducts={products.machine} numberOfProduct={5} />
     </div>
 
     <button class="showMoreBtn">
@@ -29,9 +34,9 @@
   </div>
 
   <div class="cardList">
-    <button class="btn" on:click={handleClink} value="coffee"> Accessory </button>
+    <button class="btn" on:click={handleClink} value="accessory"> Accessory </button>
     <div class="cards">
-      {'CreateSmallCard(data.accessory, 5)'}
+      <ProductCard arrayOfProducts={products.accessory} numberOfProduct={5} />
     </div>
 
     <button class="showMoreBtn">

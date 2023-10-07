@@ -20,3 +20,25 @@
     </div>
   </div>
 </div>
+
+<style lang="scss">
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .btns {
+      padding: 1rem 0;
+      .btn {
+        align-self: start;
+        font-size: 24px;
+        box-sizing: border-box;
+        margin: 1rem 7.5rem;
+        background-color: var(--primary-color);
+        &:hover {
+          border: 2px solid var(--secondary-color);
+        }
+      }
+    }
+  }
+</style>

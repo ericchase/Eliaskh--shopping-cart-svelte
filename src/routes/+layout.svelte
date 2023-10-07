@@ -16,13 +16,10 @@
 <style lang="scss">
   .container {
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: grid;
-    grid-template-rows: 100px 6fr 100px;
-    .item {
-      display: grid;
-      justify-content: center;
-      align-items: center;
-    }
+    grid-template-rows: 100px 6fr 150px;
+    margin: 0;
+    padding: 0;
   }
 </style>

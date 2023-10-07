@@ -17,7 +17,7 @@
       <a href="/store">Store</a>
     </div>
     <div class="link">
-      <a href="/aboutus">About Us</a>
+      <a href="/aboutUs">About Us</a>
     </div>
   </div>
   <div class="link">

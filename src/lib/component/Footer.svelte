@@ -36,12 +36,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 2rem;
+    padding: 1rem 2rem;
     box-sizing: border-box;
     background-color: var(--secondary-color);
-
-    min-height: min-content;
-    /* align-self: end; */
   }
 
   .footer-link {

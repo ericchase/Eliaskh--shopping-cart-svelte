@@ -1,14 +1,14 @@
 <script lang="ts">
-  export let arrayOfProducts: Array;
+  import type { Product } from '$lib/model/product';
+
+  export let arrayOfProducts: Product[];
   export let numberOfProduct: number = 5;
-  let arrayOfProduct = arrayOfProducts.slice(0, numberOfProduct);
-  console.log(arrayOfProduct);
 </script>
 
 <div class="container">
-  {#each arrayOfProduct as item}
+  {#each arrayOfProducts.slice(0, numberOfProduct) as item}
     <div class="card">
-      <a href={`/product/${item.id}`} class="link">
+      <a href="/product/{item.id}" class="link">
         <div class="info">
           <img src={item.imageSrc} alt={item.name} />
           <div class="name">{item.name}</div>

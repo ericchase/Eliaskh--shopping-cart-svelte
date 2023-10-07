@@ -1,17 +1,17 @@
 <footer class="footer">
   <div class="footer-link">
     <div class="link">
-      <a href="home">Home</a>
+      <a href="/home">Home</a>
     </div>
     <div class="link">
-      <a href="store">Store</a>
+      <a href="/store">Store</a>
     </div>
     <div class="link">
-      <a href="aboutUs">About Us</a>
+      <a href="/aboutUs">About Us</a>
     </div>
   </div>
   <div class="link">
-    <a href="home">
+    <a href="/home">
       <!-- <Icon path={mdiCoffeeToGo} size={3} /> -->
       <div>Coffee</div>
     </a>

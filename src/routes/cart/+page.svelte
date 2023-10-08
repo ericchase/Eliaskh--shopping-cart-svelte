@@ -6,7 +6,7 @@
 </script>
 
 <div class="container">
-  <div class="cards"><CartItemCard items={products.coffee} /></div>
+  <div class="cards"><CartItemCard products={products.coffee} /></div>
   <div class="checkOut">
     <div>Total:</div>
     <div>${total}</div>

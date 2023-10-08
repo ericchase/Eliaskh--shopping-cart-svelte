@@ -6,17 +6,17 @@
 
   import type { Product } from '$lib/model/product';
 
-  export let items: Product[];
+  export let products: Product[];
   let amount: number = 1;
 </script>
 
-{#each items as item}
+{#each products as product}
   <div class="card">
     <div class="img">
-      <img src={item.imageSrc} alt="" />
+      <img src={product.imageSrc} alt="" />
     </div>
     <div class="info">
-      <div class="name">{item.name}</div>
+      <div class="name">{product.name}</div>
       <div class="shopItem">
         <div class="btnGroup">
           <button on:click={() => {}}>
@@ -28,7 +28,7 @@
           </button>
         </div>
         <div class="price">
-          ${item.Price * amount}
+          ${product.Price * amount}
         </div>
         <div class="remove">
           <button>

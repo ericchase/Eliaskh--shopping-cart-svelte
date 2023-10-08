@@ -1,5 +1,4 @@
 <script lang="ts">
-  // @ts-ignore
   import Icon from 'svelte-icons-pack/Icon.svelte';
   import BsPlus from 'svelte-icons-pack/bs/BsPlus';
   import BsDash from 'svelte-icons-pack/bs/BsDash';

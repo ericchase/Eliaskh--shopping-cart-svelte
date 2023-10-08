@@ -1,23 +1,34 @@
 <script lang="ts">
   import ProductCard from '$lib/component/ProductCard.svelte';
   import products from '$lib/data/product.json';
+  import type { Product } from '$lib/model/product';
 
-  let typeOfProduct: string = 'coffee';
-  function handleClink(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
-    typeOfProduct = e.currentTarget.value;
-    console.log(typeOfProduct);
+  let productList: Product[] = products['coffee'];
+
+  function handleClick(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
+    switch (e.currentTarget.value) {
+      case 'coffee':
+        productList = products['coffee'];
+        break;
+      case 'machine':
+        productList = products['machine'];
+        break;
+      case 'accessory':
+        productList = products['accessory'];
+        break;
+    }
   }
 </script>
 
 <div class="container">
   <div class="btns">
-    <button class="btn" on:click={handleClink} value="coffee"> Coffee </button>
-    <button class="btn" on:click={handleClink} value="machine"> Machines </button>
-    <button class="btn" on:click={handleClink} value="accessory"> Accessory </button>
+    <button class="btn" on:click={handleClick} value="coffee"> Coffee </button>
+    <button class="btn" on:click={handleClick} value="machine"> Machines </button>
+    <button class="btn" on:click={handleClick} value="accessory"> Accessory </button>
   </div>
   <div class="cardList">
     <div class="cards">
-      <ProductCard arrayOfProducts={products[typeOfProduct]} numberOfProduct={10} />
+      <ProductCard arrayOfProducts={productList} numberOfProduct={10} />
     </div>
   </div>
 </div>

@@ -16,10 +16,8 @@
           <p class="description">{item.description}</p>
         </div>
       </a>
-      <div class="btnParent}">
-        <div class="btnParent">
-          <div>Buy Now</div>
-        </div>
+      <div class="btnParent">
+        <div>Buy Now</div>
       </div>
     </div>
   {/each}

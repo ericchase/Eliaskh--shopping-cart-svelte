@@ -145,7 +145,7 @@
   ],
   "accessory": [
     {
-      "id": 1,
+      "id": "1",
       "name": "accessoryName",
       "imageSrc": "https://www.wholelattelove.com/cdn/shop/products/5539_original_espro-dillinger-black-diamond-espresso-tamper.jpg",
       "Price": 100,

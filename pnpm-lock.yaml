@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  svelte-icons-pack:
+    specifier: ^2.1.0
+    version: 2.1.0
+
 devDependencies:
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
@@ -1804,6 +1809,10 @@ packages:
     dependencies:
       svelte: 4.2.1
     dev: true
+
+  /svelte-icons-pack@2.1.0:
+    resolution: {integrity: sha512-6Il0vWi/6MW3wXSorZhCqhkJGH4Pcg1WTcdlfFMPXfJqafZVQgmKdhVFS1c2hXGvs4byttpLC9XmI3okV1uMWA==}
+    dev: false
 
   /svelte-preprocess@5.0.4(postcss@8.4.31)(sass@1.68.0)(svelte@4.2.1)(typescript@5.2.2):
     resolution: {integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==}

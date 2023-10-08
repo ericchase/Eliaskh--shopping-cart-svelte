@@ -1,15 +1,18 @@
 <script lang="ts">
   import CartItemCard from '$lib/component/CartItemCard.svelte';
-  import products from '$lib/data/product.json';
+  import type { Product } from '$lib/model/product';
+  import { cartStore } from '$lib/store/cart-store';
 
-  let total: number = 10;
+  function calculateTotalCost(productList: Product[]) {
+    return productList.reduce((sum, product) => sum + product.Price, 0);
+  }
 </script>
 
 <div class="container">
-  <div class="cards"><CartItemCard products={products.coffee} /></div>
+  <div class="cards"><CartItemCard products={$cartStore} /></div>
   <div class="checkOut">
     <div>Total:</div>
-    <div>${total}</div>
+    <div>${calculateTotalCost($cartStore)}</div>
     <h2>pay the way you like</h2>
   </div>
 </div>

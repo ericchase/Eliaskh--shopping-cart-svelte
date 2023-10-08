@@ -1,24 +1,32 @@
 <script lang="ts">
   import type { Product } from '$lib/model/product';
+  import { cartStore } from '$lib/store/cart-store';
 
   export let arrayOfProducts: Product[];
   export let numberOfProduct: number = 5;
+
+  function addProductToCart(product: Product) {
+    cartStore.update((productList) => {
+      productList.push(product);
+      return productList;
+    });
+  }
 </script>
 
 <div class="container">
-  {#each arrayOfProducts.slice(0, numberOfProduct) as item}
+  {#each arrayOfProducts.slice(0, numberOfProduct) as product}
     <div class="card">
-      <a href="/product/{item.id}" class="link">
+      <a href="/product/{product.id}" class="link">
         <div class="info">
-          <img src={item.imageSrc} alt={item.name} />
-          <div class="name">{item.name}</div>
-          <div class="price">${item.Price}</div>
-          <p class="description">{item.description}</p>
+          <img src={product.imageSrc} alt={product.name} />
+          <div class="name">{product.name}</div>
+          <div class="price">${product.Price}</div>
+          <p class="description">{product.description}</p>
         </div>
       </a>
-      <div class="btnParent">
+      <button class="buy-now" on:click={() => addProductToCart(product)}>
         <div>Buy Now</div>
-      </div>
+      </button>
     </div>
   {/each}
 </div>
@@ -92,43 +100,22 @@
     }
   }
 
-  .btnParent {
-    display: flex;
-    justify-content: space-around;
+  .buy-now {
+    appearance: none;
+    background-color: var(--primary-color);
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    user-select: none;
     width: 100%;
-    & > div {
-      display: flex;
-      justify-content: space-around;
-      width: inherit;
-      background-color: var(--primary-color);
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 0.6em 1.2em;
-      border-radius: 8px;
-      a {
-        color: black;
-        &:hover {
-          color: black;
-        }
-      }
-      &:hover {
-        border: 2px solid var(--secondary-color);
-        color: black;
-      }
-      button {
-        padding: 0;
-        margin: 0;
-        background: none;
-        &:hover {
-          border: none;
-        }
-        &:active {
-          border: none;
-        }
-        &:focus {
-          outline: none;
-        }
-      }
+
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    &:hover {
+      border-color: var(--secondary-color);
+      color: black;
     }
   }
 </style>

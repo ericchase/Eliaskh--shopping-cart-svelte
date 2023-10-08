@@ -3,7 +3,10 @@
   import BsPlus from 'svelte-icons-pack/bs/BsPlus';
   import BsDash from 'svelte-icons-pack/bs/BsDash';
   import BsX from 'svelte-icons-pack/bs/BsX';
-  export let items: Array;
+
+  import type { Product } from '$lib/model/product';
+
+  export let items: Product[];
   let amount: number = 1;
 </script>
 

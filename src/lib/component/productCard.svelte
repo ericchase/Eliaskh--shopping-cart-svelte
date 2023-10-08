@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let arrayOfProducts: Array;
+  import type { Product } from '$lib/model/product';
+
+  export let arrayOfProducts: Product[];
   export let numberOfProduct: number = 5;
 </script>
 

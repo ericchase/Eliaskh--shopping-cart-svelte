@@ -8,6 +8,11 @@
 
   export let products: Product[];
   let amount: number = 1;
+
+  function removeProduct(Id: string) {
+    const currentProductIndex = products.findIndex((product) => (product.id = Id));
+    delete products[currentProductIndex];
+  }
 </script>
 
 {#each products as product}
@@ -19,19 +24,28 @@
       <div class="name">{product.name}</div>
       <div class="shopItem">
         <div class="btnGroup">
-          <button on:click={() => {}}>
+          <button
+            on:click={() => {
+              product.amount = product.amount + 1;
+              console.log(product.amount);
+            }}
+          >
             <Icon src={BsPlus} size={25} />
           </button>
-          <div class="amount">{amount}</div>
+          <div class="amount">{product.amount}</div>
           <button on:click={() => {}}>
             <Icon src={BsDash} size={25} />
           </button>
         </div>
         <div class="price">
-          ${product.Price * amount}
+          ${product.Price}
         </div>
         <div class="remove">
-          <button>
+          <button
+            on:click={() => {
+              removeProduct(product.id);
+            }}
+          >
             Remove
             <Icon src={BsX} size={25} />
           </button>

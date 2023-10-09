@@ -5,13 +5,17 @@
   import BsX from 'svelte-icons-pack/bs/BsX';
 
   import type { Product } from '$lib/model/product';
+  import { cartStore } from '$lib/store/cart-store';
 
   export let products: Product[];
   let amount: number = 1;
 
   function removeProduct(Id: string) {
-    const currentProductIndex = products.findIndex((product) => (product.id = Id));
-    delete products[currentProductIndex];
+    const currentProductIndex = $cartStore.findIndex((product) => (product.id = Id));
+    cartStore.update((productList) => {
+      productList.splice(currentProductIndex, 1);
+      return productList;
+    });
   }
 </script>
 

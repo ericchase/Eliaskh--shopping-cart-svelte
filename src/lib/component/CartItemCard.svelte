@@ -8,7 +8,6 @@
   import { cartStore } from '$lib/store/cart-store';
 
   export let products: Product[];
-  let amount: number = 1;
 
   function removeProduct(Id: string) {
     const currentProductIndex = $cartStore.findIndex((product) => (product.id = Id));
@@ -37,12 +36,16 @@
             <Icon src={BsPlus} size={25} />
           </button>
           <div class="amount">{product.amount}</div>
-          <button on:click={() => {}}>
+          <button
+            on:click={() => {
+              product.amount = product.amount - 1;
+            }}
+          >
             <Icon src={BsDash} size={25} />
           </button>
         </div>
         <div class="price">
-          ${product.Price}
+          ${product.Price * product.amount}
         </div>
         <div class="remove">
           <button

@@ -22,4 +22,8 @@
     margin: 0;
     padding: 0;
   }
+  .item {
+    display: flex;
+    justify-content: center;
+  }
 </style>

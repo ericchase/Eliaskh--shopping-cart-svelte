@@ -1,68 +1,58 @@
 <script lang="ts">
   import Icon from 'svelte-icons-pack/Icon.svelte';
-  import BsPlus from 'svelte-icons-pack/bs/BsPlus';
   import BsDash from 'svelte-icons-pack/bs/BsDash';
+  import BsPlus from 'svelte-icons-pack/bs/BsPlus';
   import BsX from 'svelte-icons-pack/bs/BsX';
 
   import type { Product } from '$lib/model/product';
-  import { cartStore } from '$lib/store/cart-store';
+  import {
+    calculateProductTotalCost,
+    cartProductCountStore,
+    decrementProductCount,
+    getProductCount,
+    incrementProductCount,
+    removeFromCart
+  } from '$lib/store/cart-store';
 
-  export let products: Product[];
-
-  function removeProduct(Id: string) {
-    const currentProductIndex = $cartStore.findIndex((product) => (product.id = Id));
-    cartStore.update((productList) => {
-      productList.splice(currentProductIndex, 1);
-      return productList;
-    });
-  }
+  export let product: Product;
 </script>
 
-{#each products as product}
-  <div class="card">
-    <div class="img">
-      <img src={product.imageSrc} alt="" />
-    </div>
-    <div class="info">
-      <div class="name">{product.name}</div>
-      <div class="shopItem">
+<div class="card">
+  <img src={product.imageSrc} alt="" />
+  <div class="info">
+    <div class="name">{product.name}</div>
+    <div class="shop-product">
+      <!-- values update automatically when accessing stores with the $ -->
+      <!-- but, functions that access stores internally do NOT update automatically -->
+      {#key $cartProductCountStore}
+        <!-- using the {#key} logic block allows us to update a part of the component based on some value -->
         <div class="btnGroup">
-          <button
-            on:click={() => {
-              product.amount = product.amount + 1;
-              console.log(product.amount);
-            }}
-          >
-            <Icon src={BsPlus} size={25} />
-          </button>
-          <div class="amount">{product.amount}</div>
-          <button
-            on:click={() => {
-              product.amount = product.amount - 1;
-            }}
-          >
+          <button on:click={() => decrementProductCount(product)}>
             <Icon src={BsDash} size={25} />
           </button>
+          <div class="amount">{getProductCount(product)}</div>
+          <button on:click={() => incrementProductCount(product)}>
+            <Icon src={BsPlus} size={25} />
+          </button>
         </div>
-        <div class="price">
-          ${product.Price * product.amount}
-        </div>
+        <div class="price">{calculateProductTotalCost(product).toFixed(2)}</div>
         <div class="remove">
-          <button
-            on:click={() => {
-              removeProduct(product.id);
-            }}
-          >
+          <button on:click={() => removeFromCart(product)}>
             Remove
             <Icon src={BsX} size={25} />
           </button>
         </div>
-      </div>
+      {/key}
     </div>
   </div>
-{/each}
+</div>
 
 <style lang="scss">
+  img {
+    max-height: 20rem;
+    min-width: 10rem;
+  }
+
   .card {
     display: flex;
     gap: 5rem;
@@ -70,11 +60,6 @@
     border: 3px solid var(--secondary-color);
     border-radius: 0.5rem;
     padding: 1rem;
-    .img {
-      img {
-        height: 90%;
-      }
-    }
   }
 
   .info {
@@ -88,11 +73,11 @@
     }
   }
 
-  .shopItem {
+  .shop-product {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5rem;
+    gap: 2rem;
     .btnGroup {
       display: flex;
       justify-content: center;

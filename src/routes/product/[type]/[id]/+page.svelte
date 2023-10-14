@@ -1,21 +1,11 @@
 <script lang="ts">
-  import type { Product } from '$lib/model/product';
-  import { cartStore } from '$lib/store/cart-store';
   import type { PageData } from './$types';
-
   export let data: PageData;
 
-  import products from '$lib/data/product.json';
-  //@ts-ignore
-  const productList: Product[] = products[data.type]; // ignore error for now
-  const product = productList.find((product) => product.id === data.id);
+  import ProductGroups from '$lib/data/product.json';
+  import { addToCart } from '$lib/store/cart-store';
 
-  function addProductToCart(product: Product) {
-    cartStore.update((productList) => {
-      productList.push(product);
-      return productList;
-    });
-  }
+  const product = ProductGroups.find(({ type }) => type === data.type)?.list?.find(({ id }) => id === data.id);
 </script>
 
 {#if product}
@@ -28,9 +18,9 @@
       </div>
       <div class="buyItem">
         <div class="price">
-          ${product.Price}
+          ${product.price}
         </div>
-        <button on:click={() => addProductToCart(product)}> Add to cart </button>
+        <button on:click={() => addToCart(product)}> Add to cart </button>
       </div>
     </div>
   </div>

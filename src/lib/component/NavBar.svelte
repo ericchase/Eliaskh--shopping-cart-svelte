@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cartStore } from '$lib/store/cart-store';
+  import { cartProductStore } from '$lib/store/cart-store';
 </script>
 
 <nav class="navBar">
@@ -22,7 +22,7 @@
   </div>
   <div class="link">
     <a href="/cart">
-      <div class="item">{$cartStore.size}</div>
+      <div class="item">{$cartProductStore.size}</div>
       <!-- <Icon path={mdiCartOutline} size={2} /> -->
       <div>Cart</div>
     </a>

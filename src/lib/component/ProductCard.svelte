@@ -1,19 +1,19 @@
 <script lang="ts">
   import type { Product } from '$lib/model/product';
-  import { addToCart } from '$lib/store/cart-store';
 
   export let product: Product;
+  export let productUrl: string;
 </script>
 
 <div class="card">
-  <div class="info">
+  <a href={productUrl} class="info">
     <img src={product.imageSrc} alt={product.name} />
     <div class="name">{product.name}</div>
     <div class="price">${product.Price}</div>
     <p class="description">{product.description}</p>
-  </div>
-  <!-- </a> -->
-  <button class="buy-now" on:click={() => addToCart(product)}>
+  </a>
+  <!-- the click event will be passed up to the parent -->
+  <button on:click class="button buy-now">
     <div>Buy Now</div>
   </button>
 </div>
@@ -66,7 +66,7 @@
   }
 
   .card {
-    width: 15%;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     padding: 1rem;

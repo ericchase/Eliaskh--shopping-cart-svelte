@@ -1,9 +1,7 @@
 <script lang="ts">
   import ProductCard from '$lib/component/ProductCard.svelte';
-  import productGroupsData from '$lib/data/product.json';
-  import type { Product } from '$lib/model/product';
-
-  const productGroups: [string, Product[]][] = Object.entries(productGroupsData);
+  import ProductGroups from '$lib/data/product.json';
+  import { addToCart } from '$lib/store/cart-store';
 </script>
 
 <div class="container">
@@ -12,53 +10,19 @@
     <a href="/store">Shop Now!</a>
   </div>
 
-  <div class="cardList">
-    <button class="btn" value="coffee"> Coffee </button>
-    <div class="cards">
-      <div class="product-card-container">
-        {#each productGroups[0][1] as product}
-          <button on:click={() => '/product/coffee/{product.id}'}>
-            <ProductCard {product} />
-          </button>
+  {#each ProductGroups as { type, list }}
+    <div class="cardList">
+      <button class="button" value={type}>{type}</button>
+      <div class="cards">
+        {#each list as product}
+          <ProductCard {product} on:click={() => addToCart(product)} productUrl="/product/{type}/{product.id}" />
         {/each}
       </div>
+      <button class="showMoreBtn">
+        <a href="/store">Show More {'>>'}</a>
+      </button>
     </div>
-    <button class="showMoreBtn">
-      <a href="/store">Show More {'>>'}</a>
-    </button>
-  </div>
-
-  <div class="cardList">
-    <button class="btn" value="machine"> Machine </button>
-    <div class="cards">
-      <div class="product-card-container">
-        {#each productGroups[1][1] as product}
-          <a href="/product/machine/{product.id}" class="link">
-            <ProductCard {product} />
-          </a>
-        {/each}
-      </div>
-    </div>
-    <button class="showMoreBtn">
-      <a href="/store">Show More >></a>
-    </button>
-  </div>
-
-  <div class="cardList">
-    <button class="btn" value="accessory"> Accessory </button>
-    <div class="cards">
-      <div class="product-card-container">
-        {#each productGroups[2][1] as product}
-          <a href="/product/accessory/{product.id}" class="link">
-            <ProductCard {product} />
-          </a>
-        {/each}
-      </div>
-    </div>
-    <button class="showMoreBtn">
-      <a href="/store">Show More {'>>'}</a>
-    </button>
-  </div>
+  {/each}
 </div>
 
 <style lang="scss">
@@ -92,12 +56,13 @@
     }
   }
 
-  .btn {
+  .button {
     align-self: start;
     font-size: 24px;
     box-sizing: border-box;
     margin: 1rem 7.5rem;
     background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     &:hover {
       border: 2px solid var(--secondary-color);
     }

@@ -22,7 +22,7 @@
   </div>
   <div class="link">
     <a href="/cart">
-      <div class="item">{$cartStore.length}</div>
+      <div class="item">{$cartStore.size}</div>
       <!-- <Icon path={mdiCartOutline} size={2} /> -->
       <div>Cart</div>
     </a>

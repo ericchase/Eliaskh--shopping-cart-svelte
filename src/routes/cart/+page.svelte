@@ -1,18 +1,24 @@
 <script lang="ts">
   import CartItemCard from '$lib/component/CartItemCard.svelte';
   import type { Product } from '$lib/model/product';
-  import { cartStore } from '$lib/store/cart-store';
+  import { cartStore, getTotalProductCost } from '$lib/store/cart-store';
 
-  function calculateTotalCost(productList: Product[]) {
-    return productList.reduce((sum, product) => sum + product.Price, 0);
-  }
+  const amountMap = new Map();
+  amountMap.set(product[0], 1);
+  amountMap.set(product[1], 2);
+
+  const amountArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+  // function calculateTotalCost(productList: Product[]) {
+  //   return productList.reduce((sum, product) => sum + product.Price * product.amount, 0);
+  // }
 </script>
 
 <div class="container">
   <div class="cards"><CartItemCard products={$cartStore} /></div>
   <div class="checkOut">
     <div>Total:</div>
-    <div>${calculateTotalCost($cartStore)}</div>
+    <div>${getTotalProductCost()}</div>
     <h2>pay the way you like</h2>
   </div>
 </div>

@@ -1,12 +1,14 @@
 <script lang="ts">
-  import type { PageData } from './$types';
-  import { cartStore } from '$lib/store/cart-store';
   import type { Product } from '$lib/model/product';
+  import { cartStore } from '$lib/store/cart-store';
+  import type { PageData } from './$types';
 
   export let data: PageData;
-  import products from '$lib/data/product.json';
 
-  const index = +data.productId[0] - 1;
+  import products from '$lib/data/product.json';
+  //@ts-ignore
+  const productList: Product[] = products[data.type]; // ignore error for now
+  const product = productList.find((product) => product.id === data.id);
 
   function addProductToCart(product: Product) {
     cartStore.update((productList) => {
@@ -14,45 +16,27 @@
       return productList;
     });
   }
-
-  function findType(id) {
-    let type = '';
-    switch (id[1]) {
-      case 'C':
-        type = 'coffee';
-        break;
-
-      case 'M':
-        type = 'machine';
-        break;
-
-      case 'A':
-        type = 'accessory';
-        break;
-    }
-    return products[type];
-  }
-
-  const currentProducts = findType(data.productId);
-
-  const product = currentProducts[index];
 </script>
 
-<div class="container">
-  <div class="img"><img src={product.imageSrc} alt={product.name} /></div>
-  <div class="info">
-    <div class="title">{product.name}</div>
-    <div class="description">
-      {product.description}
-    </div>
-    <div class="buyItem">
-      <div class="price">
-        ${product.Price}
+{#if product}
+  <div class="container">
+    <div class="img"><img src={product.imageSrc} alt={product.name} /></div>
+    <div class="info">
+      <div class="title">{product.name}</div>
+      <div class="description">
+        {product.description}
       </div>
-      <button on:click={() => addProductToCart(product)}> Add to cart </button>
+      <div class="buyItem">
+        <div class="price">
+          ${product.Price}
+        </div>
+        <button on:click={() => addProductToCart(product)}> Add to cart </button>
+      </div>
     </div>
   </div>
-</div>
+{:else}
+  Product Not Found
+{/if}
 
 <style lang="scss">
   .container {

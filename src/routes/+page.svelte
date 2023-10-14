@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
   import ProductCard from '$lib/component/ProductCard.svelte';
-  import products from '$lib/data/product.json';
+  import productGroupsData from '$lib/data/product.json';
+  import type { Product } from '$lib/model/product';
 
-  function handleClink(e) {}
+  const productGroups: [string, Product[]][] = Object.entries(productGroupsData);
 </script>
 
 <div class="container">
@@ -12,33 +13,48 @@
   </div>
 
   <div class="cardList">
-    <button class="btn" on:click={handleClink} value="coffee"> Coffee </button>
+    <button class="btn" value="coffee"> Coffee </button>
     <div class="cards">
-      <ProductCard arrayOfProducts={products.coffee} numberOfProduct={5} />
+      <div class="product-card-container">
+        {#each productGroups[0][1] as product}
+          <button on:click={() => '/product/coffee/{product.id}'}>
+            <ProductCard {product} />
+          </button>
+        {/each}
+      </div>
     </div>
-
     <button class="showMoreBtn">
       <a href="/store">Show More {'>>'}</a>
     </button>
   </div>
 
   <div class="cardList">
-    <button class="btn" on:click={handleClink} value="machine"> Machine </button>
+    <button class="btn" value="machine"> Machine </button>
     <div class="cards">
-      <ProductCard arrayOfProducts={products.machine} numberOfProduct={5} />
+      <div class="product-card-container">
+        {#each productGroups[1][1] as product}
+          <a href="/product/machine/{product.id}" class="link">
+            <ProductCard {product} />
+          </a>
+        {/each}
+      </div>
     </div>
-
     <button class="showMoreBtn">
       <a href="/store">Show More >></a>
     </button>
   </div>
 
   <div class="cardList">
-    <button class="btn" on:click={handleClink} value="accessory"> Accessory </button>
+    <button class="btn" value="accessory"> Accessory </button>
     <div class="cards">
-      <ProductCard arrayOfProducts={products.accessory} numberOfProduct={5} />
+      <div class="product-card-container">
+        {#each productGroups[2][1] as product}
+          <a href="/product/accessory/{product.id}" class="link">
+            <ProductCard {product} />
+          </a>
+        {/each}
+      </div>
     </div>
-
     <button class="showMoreBtn">
       <a href="/store">Show More {'>>'}</a>
     </button>
@@ -118,5 +134,19 @@
   .cardList {
     display: flex;
     flex-direction: column;
+  }
+
+  .product-card-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .link {
+    color: black;
+    &:hover {
+      color: black;
+    }
   }
 </style>

@@ -9,10 +9,20 @@
   const index = +data.productId[0] - 1;
 
   function addProductToCart(product: Product) {
-    cartStore.update((productList) => {
-      productList.push(product);
-      return productList;
-    });
+    if ($cartStore.indexOf(product) == -1) {
+      cartStore.update((productList) => {
+        productList.push(product);
+        return productList;
+      });
+    } else {
+      const index = $cartStore.indexOf(product);
+      cartStore.update((productList) => {
+        productList[index].amount = productList[index].amount + 1;
+        console.log(productList[index].amount + 1, index);
+        return productList;
+      });
+    }
+    console.log($cartStore);
   }
 
   function findType(id) {

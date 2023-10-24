@@ -28,7 +28,7 @@
   </div>
   <div class="cardList">
     <div class="cards">
-      <ProductCard arrayOfProducts={productList} numberOfProduct={10} />
+      <ProductCard {productList} displayLimit={10} />
     </div>
   </div>
 </div>

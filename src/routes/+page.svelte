@@ -1,8 +1,7 @@
-<script>
+<script lang="ts">
   import ProductCard from '$lib/component/ProductCard.svelte';
-  import products from '$lib/data/product.json';
-
-  function handleClink(e) {}
+  import ProductGroups from '$lib/data/product.json';
+  import { addToCart } from '$lib/store/cart-store';
 </script>
 
 <div class="container">
@@ -11,38 +10,19 @@
     <a href="/store">Shop Now!</a>
   </div>
 
-  <div class="cardList">
-    <button class="btn" on:click={handleClink} value="coffee"> Coffee </button>
-    <div class="cards">
-      <ProductCard arrayOfProducts={products.coffee} numberOfProduct={5} />
+  {#each ProductGroups as { type, list }}
+    <div class="cardList">
+      <button class="button" value={type}>{type}</button>
+      <div class="cards">
+        {#each list as product}
+          <ProductCard {product} on:click={() => addToCart(product)} productUrl="/product/{type}/{product.id}" />
+        {/each}
+      </div>
+      <button class="showMoreBtn">
+        <a href="/store">Show More {'>>'}</a>
+      </button>
     </div>
-
-    <button class="showMoreBtn">
-      <a href="/store">Show More {'>>'}</a>
-    </button>
-  </div>
-
-  <div class="cardList">
-    <button class="btn" on:click={handleClink} value="machine"> Machine </button>
-    <div class="cards">
-      <ProductCard arrayOfProducts={products.machine} numberOfProduct={5} />
-    </div>
-
-    <button class="showMoreBtn">
-      <a href="/store">Show More >></a>
-    </button>
-  </div>
-
-  <div class="cardList">
-    <button class="btn" on:click={handleClink} value="accessory"> Accessory </button>
-    <div class="cards">
-      <ProductCard arrayOfProducts={products.accessory} numberOfProduct={5} />
-    </div>
-
-    <button class="showMoreBtn">
-      <a href="/store">Show More {'>>'}</a>
-    </button>
-  </div>
+  {/each}
 </div>
 
 <style lang="scss">
@@ -76,12 +56,13 @@
     }
   }
 
-  .btn {
+  .button {
     align-self: start;
     font-size: 24px;
     box-sizing: border-box;
     margin: 1rem 7.5rem;
     background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
     &:hover {
       border: 2px solid var(--secondary-color);
     }
@@ -118,5 +99,19 @@
   .cardList {
     display: flex;
     flex-direction: column;
+  }
+
+  .product-card-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .link {
+    color: black;
+    &:hover {
+      color: black;
+    }
   }
 </style>

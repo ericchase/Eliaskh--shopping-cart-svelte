@@ -1,54 +1,24 @@
 <script lang="ts">
   import type { Product } from '$lib/model/product';
-  import { cartStore } from '$lib/store/cart-store';
 
-  export let arrayOfProducts: Product[];
-  export let numberOfProduct: number = 5;
-
-  function addProductToCart(product: Product) {
-    if ($cartStore.indexOf(product) == -1) {
-      cartStore.update((productList) => {
-        productList.push(product);
-        return productList;
-      });
-    } else {
-      const index = $cartStore.indexOf(product);
-      cartStore.update((productList) => {
-        productList[index].amount = productList[index].amount + 1;
-        console.log(productList[index].amount + 1, index);
-        return productList;
-      });
-    }
-    console.log($cartStore);
-  }
+  export let product: Product;
+  export let productUrl: string;
 </script>
 
-<div class="container">
-  {#each arrayOfProducts.slice(0, numberOfProduct) as product}
-    <div class="card">
-      <a href="/product/{product.id}" class="link">
-        <div class="info">
-          <img src={product.imageSrc} alt={product.name} />
-          <div class="name">{product.name}</div>
-          <div class="price">${product.Price}</div>
-          <p class="description">{product.description}</p>
-        </div>
-      </a>
-      <button class="buy-now" on:click={() => addProductToCart(product)}>
-        <div>Buy Now</div>
-      </button>
-    </div>
-  {/each}
+<div class="card">
+  <a href={productUrl} class="info">
+    <img src={product.imageSrc} alt={product.name} />
+    <div class="name">{product.name}</div>
+    <div class="price">${product.Price}</div>
+    <p class="description">{product.description}</p>
+  </a>
+  <!-- the click event will be passed up to the parent -->
+  <button on:click class="button buy-now">
+    <div>Buy Now</div>
+  </button>
 </div>
 
 <style lang="scss">
-  .container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
   .info {
     display: flex;
     flex-direction: column;
@@ -96,18 +66,11 @@
   }
 
   .card {
-    width: 15%;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     gap: 0.5rem;
-  }
-
-  .link {
-    color: black;
-    &:hover {
-      color: black;
-    }
   }
 
   .buy-now {

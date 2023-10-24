@@ -88,17 +88,13 @@
       margin: 0;
       padding: 0.2rem 0.5rem;
       background-color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
       &:hover {
-        border: 1px solid var(--secondary-color);
-      }
-      &:focus {
-        outline: none;
-      }
-      &:focus-visible {
-        outline: none;
+        border: 2px solid var(--secondary-color);
       }
     }
   }

@@ -5,7 +5,6 @@
 <nav class="navBar">
   <div class="link">
     <a href="/">
-      <!-- <Icon path={mdiCoffeeToGo} size={2} /> -->
       <div>Coffee</div>
     </a>
   </div>
@@ -23,18 +22,12 @@
   <div class="link">
     <a href="/cart">
       <div class="item">{$cartProductStore.size}</div>
-      <!-- <Icon path={mdiCartOutline} size={2} /> -->
       <div>Cart</div>
     </a>
   </div>
 </nav>
 
 <style>
-  .logo {
-    width: 8rem;
-    height: auto;
-  }
-
   .link {
     color: black;
     list-style: none;

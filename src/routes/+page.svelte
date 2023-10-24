@@ -18,7 +18,7 @@
           <ProductCard {product} on:click={() => addToCart(product)} productUrl="/product/{type}/{product.id}" />
         {/each}
       </div>
-      <button class="showMoreBtn">
+      <button class="showMoreBtn button">
         <a href="/store">Show More {'>>'}</a>
       </button>
     </div>
@@ -27,9 +27,6 @@
 
 <style lang="scss">
   .container {
-    margin: 0;
-    padding: 0;
-
     display: flex;
     flex-direction: column;
     .big-image {
@@ -71,6 +68,7 @@
   .cards {
     width: 100%;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     margin: 2rem 0;
@@ -78,40 +76,22 @@
     gap: 1rem;
   }
 
+  .cardList {
+    display: flex;
+    flex-direction: column;
+    div {
+      width: 20%;
+    }
+  }
   .showMoreBtn {
-    font-size: 24px;
-    padding: 1rem 0;
     align-self: center;
     width: 30%;
-    margin-bottom: 1rem;
     background-color: var(--primary-color);
-    &:hover {
-      border: 2px solid var(--secondary-color);
-    }
     a {
       color: black;
       &:hover {
         color: black;
       }
-    }
-  }
-
-  .cardList {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .product-card-container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .link {
-    color: black;
-    &:hover {
-      color: black;
     }
   }
 </style>

@@ -83,6 +83,8 @@
 
       border-radius: 8px;
       border: 2px solid var(--primary-color);
+
+      padding: 0.5rem 1rem;
       &:hover {
         border-color: var(--secondary-color);
         color: black;

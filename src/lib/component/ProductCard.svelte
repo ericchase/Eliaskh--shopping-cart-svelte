@@ -28,8 +28,6 @@
     height: 30rem;
     border: 2px solid var(--secondary-color);
     border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
     position: relative;
     .name {
       color: black;
@@ -61,11 +59,13 @@
       .description {
         display: inline;
         opacity: 1;
+        color: black;
       }
     }
   }
 
   .card {
+    width: 15%;
     min-width: 300px;
     display: flex;
     flex-direction: column;

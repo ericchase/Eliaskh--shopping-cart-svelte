@@ -54,10 +54,19 @@
         box-sizing: border-box;
         margin: 1rem 7.5rem;
         background-color: var(--primary-color);
+        border-radius: 8px;
+        border: 2px solid var(--primary-color);
+        padding: 0.5rem 1rem;
         &:hover {
           border: 2px solid var(--secondary-color);
         }
       }
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 </style>

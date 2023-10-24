@@ -5,21 +5,21 @@
   import { addToCart } from '$lib/store/cart-store';
 
   let productList: Product[] = products[0].list;
-  let type: string = 'coffee';
+  let type: string = 'Coffee';
 
   function handleClick(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
     switch (e.currentTarget.value) {
       case 'coffee':
         productList = products[0].list;
-        type = 'coffee';
+        type = 'Coffee';
         break;
       case 'machine':
         productList = products[1].list;
-        type = 'machine';
+        type = 'Machine';
         break;
       case 'accessory':
         productList = products[2].list;
-        type = 'accessory';
+        type = 'Accessory';
         break;
     }
   }

@@ -2,19 +2,24 @@
   import ProductCard from '$lib/component/ProductCard.svelte';
   import products from '$lib/data/product.json';
   import type { Product } from '$lib/model/product';
+  import { addToCart } from '$lib/store/cart-store';
 
-  let productList: Product[] = products['coffee'];
+  let productList: Product[] = products[0].list;
+  let type: string = 'coffee';
 
   function handleClick(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
     switch (e.currentTarget.value) {
       case 'coffee':
-        productList = products['coffee'];
+        productList = products[0].list;
+        type = 'coffee';
         break;
       case 'machine':
-        productList = products['machine'];
+        productList = products[1].list;
+        type = 'machine';
         break;
       case 'accessory':
-        productList = products['accessory'];
+        productList = products[2].list;
+        type = 'accessory';
         break;
     }
   }
@@ -28,7 +33,9 @@
   </div>
   <div class="cardList">
     <div class="cards">
-      <ProductCard {productList} displayLimit={10} />
+      {#each productList as product}
+        <ProductCard {product} on:click={() => addToCart(product)} productUrl="/product/{type}/{product.id}" />
+      {/each}
     </div>
   </div>
 </div>

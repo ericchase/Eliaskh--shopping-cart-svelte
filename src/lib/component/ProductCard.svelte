@@ -9,7 +9,7 @@
   <a href={productUrl} class="info">
     <img src={product.imageSrc} alt={product.name} />
     <div class="name">{product.name}</div>
-    <div class="price">${product.Price}</div>
+    <div class="price">${product.price}</div>
     <p class="description">{product.description}</p>
   </a>
   <!-- the click event will be passed up to the parent -->

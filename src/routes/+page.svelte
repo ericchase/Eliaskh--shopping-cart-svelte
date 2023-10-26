@@ -79,9 +79,6 @@
   .cardList {
     display: flex;
     flex-direction: column;
-    div {
-      width: 20%;
-    }
   }
   .showMoreBtn {
     align-self: center;

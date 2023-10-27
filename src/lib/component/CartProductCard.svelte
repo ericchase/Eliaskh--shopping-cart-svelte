@@ -28,18 +28,18 @@
         <!-- using the {#key} logic block allows us to update a part of the component based on some value -->
         <div class="btnGroup">
           <button on:click={() => decrementProductCount(product)}>
-            <Icon src={BsDash} size={25} />
+            <Icon src={BsDash} size="25px" />
           </button>
           <div class="amount">{getProductCount(product)}</div>
           <button on:click={() => incrementProductCount(product)}>
-            <Icon src={BsPlus} size={25} />
+            <Icon src={BsPlus} size="25px" />
           </button>
         </div>
         <div class="price">{calculateProductTotalCost(product).toFixed(2)}</div>
         <div class="remove">
           <button on:click={() => removeFromCart(product)}>
             Remove
-            <Icon src={BsX} size={25} />
+            <Icon src={BsX} size="25px" />
           </button>
         </div>
       {/key}

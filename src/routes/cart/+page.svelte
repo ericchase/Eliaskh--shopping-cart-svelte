@@ -1,19 +1,23 @@
 <script lang="ts">
   import CartProductCard from '$lib/component/CartProductCard.svelte';
-  import { cartProductCountStore, cartProductStore, getTotalCostOfAllProducts } from '$lib/store/cart-store';
+  import { getProductsByIds } from '$lib/lib';
+  import { cartProductStore, getTotalCostOfAllProducts } from '$lib/store/cart-store';
+  import { derived } from 'svelte/store';
+
+  const products = derived(cartProductStore, ($cartProductStore) => {
+    return getProductsByIds([...$cartProductStore.keys()]);
+  });
 </script>
 
 <div class="container">
   <div class="cards">
-    {#each $cartProductStore as product}
+    {#each $products as product}
       <CartProductCard {product} />
     {/each}
   </div>
   <div>
     <div class="checkOut">
-      {#key $cartProductCountStore}
-        <div class="total">Total: ${getTotalCostOfAllProducts().toFixed(2)}</div>
-      {/key}
+      <div class="total">Total: ${getTotalCostOfAllProducts($products).toFixed(2)}</div>
       <h2>pay the way you like</h2>
     </div>
   </div>

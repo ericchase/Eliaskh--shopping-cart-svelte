@@ -1,40 +1,22 @@
 <script lang="ts">
   import ProductCard from '$lib/component/ProductCard.svelte';
-  import products from '$lib/data/product.json';
-  import type { Product } from '$lib/model/product';
+  import { getProductsByType, productTypes } from '$lib/lib';
   import { addToCart } from '$lib/store/cart-store';
 
-  let productList: Product[] = products[0].list;
-  let type: string = 'Coffee';
-
-  function handleClick(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) {
-    switch (e.currentTarget.value) {
-      case 'coffee':
-        productList = products[0].list;
-        type = 'Coffee';
-        break;
-      case 'machine':
-        productList = products[1].list;
-        type = 'Machine';
-        break;
-      case 'accessory':
-        productList = products[2].list;
-        type = 'Accessory';
-        break;
-    }
-  }
+  let selectedType = 'Coffee';
+  $: console.log(selectedType);
 </script>
 
 <div class="container">
   <div class="btns">
-    <button class="btn" on:click={handleClick} value="coffee"> Coffee </button>
-    <button class="btn" on:click={handleClick} value="machine"> Machines </button>
-    <button class="btn" on:click={handleClick} value="accessory"> Accessory </button>
+    {#each productTypes as type}
+      <button class="btn" on:click={(e) => (selectedType = e.currentTarget.value)} value={type}>{type}</button>
+    {/each}
   </div>
   <div class="cardList">
     <div class="cards">
-      {#each productList as product}
-        <ProductCard {product} on:click={() => addToCart(product)} productUrl="/product/{type}/{product.id}" />
+      {#each getProductsByType(selectedType) as product}
+        <ProductCard {product} on:click={() => addToCart(product)} productUrl="/product/{selectedType}/{product.id}" />
       {/each}
     </div>
   </div>

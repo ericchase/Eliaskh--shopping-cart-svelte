@@ -7,7 +7,7 @@
   import type { Product } from '$lib/model/product';
   import {
     calculateProductTotalCost,
-    cartProductCountStore,
+    cartProductStore,
     decrementProductCount,
     getProductCount,
     incrementProductCount,
@@ -24,7 +24,7 @@
     <div class="shop-product">
       <!-- values update automatically when accessing stores with the $ -->
       <!-- but, functions that access stores internally do NOT update automatically -->
-      {#key $cartProductCountStore}
+      {#key $cartProductStore}
         <!-- using the {#key} logic block allows us to update a part of the component based on some value -->
         <div class="btnGroup">
           <button on:click={() => decrementProductCount(product)}>
